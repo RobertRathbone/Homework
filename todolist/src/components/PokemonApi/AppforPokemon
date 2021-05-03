@@ -1,0 +1,41 @@
+import { useEffect, useState } from 'react';
+// import { Router } from '@reach/router';
+// import axios from 'axios';
+import './App.css';
+// import RouteHome from './components/RouteHome';
+// import RouteNumber from './components/RouteNumber';
+// import RouteHello from './components/RouteHello';
+// import RouteFancyHello from './components/RouteFancyHello';
+// import Getter from './components/Getter';
+
+
+function App() {
+
+  // Pokemon app
+  const [pokemon, setPokemon] = useState([
+    {name: "Yerty"}
+  ]);
+
+  const getPokemon = () => {
+    axios.get("https://pokeapi.co/api/v2/pokemon?limit=807")
+          .then(response => {
+            setPokemon(response.data.results);
+          })
+          .catch(err => console.log(err))
+
+  };
+
+  return (
+    <div className="App">
+      {
+      pokemon.map((poke, index) =>
+        <p key={index}>{poke.name}</p>
+      )
+      
+      }
+      <button onClick ={getPokemon}>More Pokemon?</button>
+    </div>
+  );
+}
+
+export default App;
